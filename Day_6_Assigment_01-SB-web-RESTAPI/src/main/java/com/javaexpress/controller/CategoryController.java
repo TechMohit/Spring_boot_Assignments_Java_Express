@@ -24,19 +24,17 @@ public class CategoryController {
 	private CategoryService categoryService;
 
 	@PostMapping
-	public void createUser(@RequestBody Category category) {
+	public void createCategory(@RequestBody Category category) {
 		log.info("CategoryController ::CreateCatogry{}", category.getName());
 		categoryService.createCategory(category);
 		log.info("Category created successfully");
-
 	}
 
 	// http://localhost:8080/api/v1/category/123
 	@GetMapping("{categoryId}")
 	public Category getCategoryById(@PathVariable Long categoryId) {
 		log.info("Categorycontroller:: getCategoryId {}", categoryId);
-		return categoryService.findCategoryByID(categoryId);
-
+		return categoryService.findCategoryById(categoryId);
 	}
 
 	@PutMapping("{categoryId}")
@@ -51,7 +49,5 @@ public class CategoryController {
 		log.info("Categorycontroller:: deleteCategory {} ", categoryId);
 		categoryService.deleteCategory(categoryId);
 		log.info("Category deleted successfully");
-
 	}
-
 }

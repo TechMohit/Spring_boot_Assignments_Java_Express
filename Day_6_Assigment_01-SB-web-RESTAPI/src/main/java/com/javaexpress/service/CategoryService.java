@@ -22,7 +22,6 @@ public class CategoryService {
 		log.info("CategoryService::createCategory() {}", category.getName());
 		categoryRepository.save(category);
 		log.info("category Successfully save in DB");
-
 	}
 
 	public List<Category> fetchAllCategory() {
@@ -30,22 +29,19 @@ public class CategoryService {
 		List<Category> categoryList = categoryRepository.findAll();
 		List<Category> result = categoryList.stream().sorted(Comparator.comparing(Category::getName)).toList();
 		return result;
-
 	}
 
-	public Category findCategoryByID(Long categoryId) {
-		log.info("CategoryService::findCategoryByID() {}", categoryId);
+	public Category findCategoryById(Long categoryId) {
+		log.info("CategoryService::findCategoryById() {}", categoryId);
 		return categoryRepository.findById(categoryId).orElseThrow(() -> new RuntimeException("Category Not Found"));
-
 	}
 
 	public void updateCategory(Long categoryId, Category category) {
 		log.info("CategoryService::updateCategory() {}", categoryId);
-		Category dbUser = findCategoryByID(categoryId);
-		dbUser.setName(category.getName());
-		categoryRepository.save(dbUser);
+		Category dbCategory = findCategoryById(categoryId);
+		dbCategory.setName(category.getName());
+		categoryRepository.save(dbCategory);
 		log.info("update category successfully in DB");
-
 	}
 
 	public void deleteCategory(Long categoryId) {
@@ -55,8 +51,6 @@ public class CategoryService {
 			log.info("delete category successfully in DB");
 		} else {
 			throw new RuntimeException(" Category Not Found");
-
 		}
-
 	}
 }
