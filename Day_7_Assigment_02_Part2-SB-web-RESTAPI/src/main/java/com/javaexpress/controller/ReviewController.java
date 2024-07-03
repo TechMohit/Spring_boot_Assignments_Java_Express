@@ -1,5 +1,7 @@
 package com.javaexpress.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -48,5 +50,12 @@ public class ReviewController {
 		log.info("ReviewController ::updateReview{}", reviewId);
 		reviewService.updateReview(reviewId, review);
 		log.info("Review updated successfully");
+	}
+
+	@GetMapping("/getByProductId/{pId}")
+	public List<Review> fetchReviewByProductId(@PathVariable(name = "pId") long productId) {
+		log.info("ReviewController ::fetchReviewByProductId{}", productId);
+		return reviewService.getReviewByProductId(productId);
+
 	}
 }
